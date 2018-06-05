@@ -108,4 +108,140 @@ public class GraphTest {
     	Assert.assertTrue(expectedMeanEdge == controller.getMeanEdge(controller.getGraph()));
 
     }
+    
+    
+    @Test
+	public void vertexCreation() {
+		Graph graph = new Graph(2);
+		try {
+			graph.createVertex("a");
+			graph.createVertex("a");
+            Assert.fail();
+        } catch (Exception e) {
+            String message = "Vertex already exists.";
+            Assert.assertEquals(true, e.getMessage().equals(message));
+        }
+    }
+
+	@Test
+	public void connectSimpleTest1 () {
+		Graph graph = new Graph(2);
+		try {
+			String vertices = "1 2 3";
+			graph.connectSimpleVertex(vertices);
+            Assert.fail();
+        } catch (Exception e) {
+            String message = "Cannot create a connection. For input string: \"c\"";
+            Assert.assertEquals(true, e.getMessage().equals(message));
+        }
+    }
+	
+	 @Test
+	    public void connectWeightedTest1() {
+	        Graph graph = new Graph(2);
+	        try {
+	            String vertices = "a b c";
+	            graph.connectWeightedVertex(vertices);
+	            Assert.fail();
+	        } catch (Exception e) {
+	            String message = "Cannot create a connection. For input string: \"c\"";
+	            Assert.assertEquals(true, e.getMessage().equals(message));
+	        }
+	    }
+
+	@Test
+	public void connectSimpleTest2 () {
+		Graph graph = new Graph(2);
+		try {
+			String vertices = "a b c d";
+			graph.connectSimpleVertex(vertices);
+            Assert.fail();
+        } catch (Exception e) {
+            String message = "Cannot create a connection. Exceeding arguments";
+            Assert.assertEquals(true, e.getMessage().equals(message));
+		}
+	}
+	
+	@Test
+    public void connectWeightedTest2() {
+        Graph graph = new Graph(2);
+        try {
+            String vertices = "1 2 3 4";
+            graph.connectWeightedVertex(vertices);
+            Assert.fail();
+        } catch (Exception e) {
+            String message = "Cannot create a connection. Exceeding arguments";
+            Assert.assertEquals(true, e.getMessage().equals(message));
+        }
+    }
+
+	@Test
+	public void connectSimpleTest3 () {
+		Graph graph = new Graph(2);
+		try {
+			String vertices = "";
+			graph.connectSimpleVertex(vertices);
+            Assert.fail();
+        } catch (Exception e) {
+            String message = "Cannot create a connection. Missing arguments";
+            Assert.assertEquals(true, e.getMessage().equals(message));
+		}
+	}
+	
+	@Test
+    public void connectWeightedTest3() {
+        Graph graph = new Graph(2);
+        try {
+            String vertices = "";
+            graph.connectWeightedVertex(vertices);
+            Assert.fail();
+        } catch (Exception e) {
+            String message = "Cannot create a connection. Missing arguments";
+            Assert.assertEquals(true, e.getMessage().equals(message));
+        }
+    }
+
+    @Test
+    public void connectSimpleTest4 () {
+        Graph graph = new Graph(2);
+        try {
+            String vertices = "a b";
+            graph.connectSimpleVertex(vertices);
+        } catch (Exception e) {
+            Assert.fail();
+        }
+    }
+    
+    @Test
+    public void connectWeightedTest4() {
+        Graph graph = new Graph(2);
+        try {
+            String vertices = "a b 4.6";
+            graph.connectWeightedVertex(vertices);
+        } catch (Exception e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void connectSimpleTest5() {
+        Graph graph = new Graph(2);
+        try {
+            String vertices = "1 2";
+            graph.connectSimpleVertex(vertices);
+        } catch (Exception e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void connectWeightedTest5() {
+        Graph graph = new Graph(2);
+        try {
+            String vertices = "1 2 -6.6";
+            graph.connectSimpleVertex(vertices);
+        } catch (Exception e) {
+            Assert.fail();
+        }
+    }
 }
