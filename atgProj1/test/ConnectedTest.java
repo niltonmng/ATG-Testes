@@ -17,6 +17,7 @@ public class ConnectedTest {
     private final String path3 = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "graph3.txt"; 
     private final String path4 = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "graph4.txt"; 
     private final String path5 = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "graph5.txt"; 
+    private final String path6 = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "graph6.txt";
 	
 	@Before
     public void prepareGraphFile1() {
@@ -42,7 +43,7 @@ public class ConnectedTest {
     
     @Before
     public void prepareGraphFile3() {
-        List<String> lines = Arrays.asList("7", "1 1", "2 2", "3 3", "4 4", "5 5", "6 6", "7 7");
+        List<String> lines = Arrays.asList("7","3 4", "4 5", "5 6", "6 7");
         Path file = Paths.get(path3);
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
@@ -53,7 +54,7 @@ public class ConnectedTest {
     
     @Before
     public void prepareGraphFile4() {
-        List<String> lines = Arrays.asList("2", "1 1");
+        List<String> lines = Arrays.asList("3", "2 3");
         Path file = Paths.get(path4);
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
@@ -66,6 +67,17 @@ public class ConnectedTest {
     public void prepareGraphFile5() {
         List<String> lines = Arrays.asList("2", "1 2");
         Path file = Paths.get(path5);
+        try {
+            Files.write(file, lines, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            Assert.fail();
+        }
+    }
+    
+    @Before
+    public void prepareGraphFile6() {
+        List<String> lines = Arrays.asList("7", "");
+        Path file = Paths.get(path6);
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
         } catch (IOException e) {
@@ -108,6 +120,9 @@ public class ConnectedTest {
         }
     }
     
+    /*
+     *  7 vertices | Vertices 1 e 2 nao estao conectados com ninguem
+     */
     @Test
     public void testConnectedGraph3() {
         try {
@@ -123,6 +138,9 @@ public class ConnectedTest {
         }
     }
     
+    /*
+     *  3 vertices | 1 aresta (2->3)
+     */
     @Test
     public void testConnectedGraph4() {
         try {
@@ -132,7 +150,7 @@ public class ConnectedTest {
         }
         
         try {
-        	Assert.assertTrue(controller.connected(controller.getGraph()));
+        	Assert.assertFalse(controller.connected(controller.getGraph()));
         } catch (Exception e) {
         	Assert.fail();
         }
@@ -148,6 +166,24 @@ public class ConnectedTest {
         
         try {
         	Assert.assertTrue(controller.connected(controller.getGraph()));
+        } catch (Exception e) {
+        	Assert.fail();
+        }
+    }
+    
+    /*
+     *  7 vertices | 0 arestas
+     */
+    @Test
+    public void testConnectedGraph6() {
+        try {
+            controller.readGraph(path6);
+        } catch (Exception e) {
+            Assert.fail();
+        }
+        
+        try {
+        	Assert.assertFalse(controller.connected(controller.getGraph()));
         } catch (Exception e) {
         	Assert.fail();
         }
