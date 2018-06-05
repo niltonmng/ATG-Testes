@@ -111,7 +111,7 @@ public class GraphTest {
 
 
 	@Test
-	public void vertexCreation() {
+	public void vertexCreation1() {
 		Graph graph = new Graph(2);
 		try {
 			graph.createVertex("a");
@@ -119,6 +119,31 @@ public class GraphTest {
 			Assert.fail();
 		} catch (Exception e) {
 			String message = "Vertex already exists.";
+			Assert.assertEquals(true, e.getMessage().equals(message));
+		}
+	}
+	
+	@Test
+	public void vertexCreation2() {
+		Graph graph = new Graph(2);
+		try {
+			graph.createVertex("1");
+			graph.createVertex("1");
+			Assert.fail();
+		} catch (Exception e) {
+			String message = "Vertex already exists.";
+			Assert.assertEquals(true, e.getMessage().equals(message));
+		}
+	}
+	
+	@Test
+	public void vertexCreation3() {
+		Graph graph = new Graph(2);
+		try {
+			graph.createVertex("");
+			Assert.fail();
+		} catch (Exception e) {
+			String message = "";
 			Assert.assertEquals(true, e.getMessage().equals(message));
 		}
 	}
