@@ -124,7 +124,7 @@ public class GraphTest {
 	}
 
 	@Test
-	public void connectSimpleTest1 () {
+	public void connectSimpleTest1() {
 		Graph graph = new Graph(2);
 		try {
 			String vertices = "1 2 3";
@@ -150,7 +150,7 @@ public class GraphTest {
 	}
 
 	@Test
-	public void connectSimpleTest2 () {
+	public void connectSimpleTest2() {
 		Graph graph = new Graph(2);
 		try {
 			String vertices = "a b c d";
@@ -176,7 +176,7 @@ public class GraphTest {
 	}
 
 	@Test
-	public void connectSimpleTest3 () {
+	public void connectSimpleTest3() {
 		Graph graph = new Graph(2);
 		try {
 			String vertices = "";
@@ -202,7 +202,7 @@ public class GraphTest {
 	}
 
 	@Test
-	public void connectSimpleTest4 () {
+	public void connectSimpleTest4() {
 		Graph graph = new Graph(2);
 		try {
 			String vertices = "a b";
@@ -242,6 +242,33 @@ public class GraphTest {
 			graph.connectSimpleVertex(vertices);
 		} catch (Exception e) {
 			Assert.fail();
+		}
+	}
+	
+	
+	@Test
+	public void connectSimpleTest6() {
+		Graph graph = new Graph(2);
+		try {
+			String vertices = " ";
+			graph.connectSimpleVertex(vertices);
+			Assert.fail();
+		} catch (Exception e) {
+			String message = "Cannot create a connection. Missing arguments";
+			Assert.assertEquals(true, e.getMessage().equals(message));
+		}
+	}
+
+	@Test
+	public void connectWeightedTest6() {
+		Graph graph = new Graph(2);
+		try {
+			String vertices = " ";
+			graph.connectWeightedVertex(vertices);
+			Assert.fail();
+		} catch (Exception e) {
+			String message = "Cannot create a connection. Missing arguments";
+			Assert.assertEquals(true, e.getMessage().equals(message));
 		}
 	}
 }
