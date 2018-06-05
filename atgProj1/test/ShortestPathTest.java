@@ -78,7 +78,7 @@ public class ShortestPathTest {
         controller = new Controller();
     }
     
-    @Test
+    @Test(timeout=1000)
     public void testNegativeCycle1() {
         try {
             controller.readWeightedGraph(path1);
@@ -95,7 +95,7 @@ public class ShortestPathTest {
         }
     }
     
-    @Test
+    @Test(timeout=1000)
     public void testNegativeEdge1() {
         try {
             controller.readWeightedGraph(path2);
@@ -146,7 +146,7 @@ public class ShortestPathTest {
         }
     }
     
-    @Test
+    @Test(timeout=1000)
     public void testNegativeEdge2() {
         try {
             controller.readWeightedGraph(path5);
